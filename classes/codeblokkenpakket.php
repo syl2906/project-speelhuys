@@ -46,7 +46,7 @@ class CodeBlokkenPakket
         return false;
     }
 
-    public function updateDatabase(): bool
+    public function update()
     {
         require_once "database.php";
 
@@ -55,7 +55,7 @@ class CodeBlokkenPakket
 
         $veiligeNaam = mysqli_real_escape_string($database->conn, $this->naam);
         $veiligeBeschrijving = mysqli_real_escape_string($database->conn, $this->beschrijving);
-        $veiligeFotoNama = mysqli_real_escape_string($database->conn, $this->fotoNaam);
+        $veiligeFotoNaam = mysqli_real_escape_string($database->conn, $this->fotoNaam);
 
         $query = "UPDATE sets SET set_name = '{$veiligeNaam}',
                     set_description = '{$veiligeBeschrijving}',
@@ -80,7 +80,7 @@ class CodeBlokkenPakket
 
         $veiligeNaam = mysqli_real_escape_string($database->conn, $this->naam);
         $veiligeBeschrijving = mysqli_real_escape_string($database->conn, $this->beschrijving);
-        $veiligeFotoNama = mysqli_real_escape_string($database->conn, $this->fotoNaam);
+        $veiligeFotoNaam = mysqli_real_escape_string($database->conn, $this->fotoNaam);
 
         $query = "INSERT INTO sets (
             set_name,
@@ -96,7 +96,7 @@ class CodeBlokkenPakket
             '{$veiligeBeschrijving}',
             {$this->brandID},
             {$this->themeID},
-            '{$this->fotoNaam}',
+            '{$veiligeFotoNaam}',
             {$this->prijs},
             {$this->age},
             {$this->steentjes},
