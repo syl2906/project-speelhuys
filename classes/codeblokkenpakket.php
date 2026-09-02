@@ -71,7 +71,7 @@ class CodeBlokkenPakket
         $database->close();
     }
 
-    public function insertNieuw()
+    public function insert()
     {
         require_once "database.php";
 
@@ -86,7 +86,7 @@ class CodeBlokkenPakket
             set_name,
             set_description,
             set_brand_id,
-            set_theme_it,
+            set_theme_id,
             set_image,
             set_price,
             set_age,
@@ -94,8 +94,8 @@ class CodeBlokkenPakket
             set_stock ) VALUES (
             '{$veiligeNaam}',
             '{$veiligeBeschrijving}',
-            {$this->merkID},
-            {$this->themaID},
+            {$this->brandID},
+            {$this->themeID},
             '{$this->fotoNaam}',
             {$this->prijs},
             {$this->age},
