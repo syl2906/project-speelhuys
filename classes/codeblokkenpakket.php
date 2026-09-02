@@ -132,21 +132,24 @@ class CodeBlokkenPakket
         $pakketten = [];
         if($resultaat->num_rows > 0)
         {
-            $pakket = new CodeBlokkenPakket();
+            while($rij = $resultaat->fetch_assoc())
+            {
+                $pakket = new CodeBlokkenPakket();
 
-            $pakket->ID = $rij["set_id"];
-            $pakket->naam = $rij["set_name"];
-            $pakket->beschrijving = $rij["set_description"];
-            $pakket->brandID = $rij["set_brand_id"];
-            $pakket->themeID = $rij["set_theme_id"];
-            $pakket->fotoNaam = $rij["set_image"];
-            $pakket->prijs = $rij["set_price"];
-            $pakket->age = $rij["set_age"];
-            $pakket->steentjes = $rij["set_pieces"];
-            $pakket->voorraad = $rij["set_stock"];
+                $pakket->ID = $rij["set_id"];
+                $pakket->naam = $rij["set_name"];
+                $pakket->beschrijving = $rij["set_description"];
+                $pakket->brandID = $rij["set_brand_id"];
+                $pakket->themeID = $rij["set_theme_id"];
+                $pakket->fotoNaam = $rij["set_image"];
+                $pakket->prijs = $rij["set_price"];
+                $pakket->age = $rij["set_age"];
+                $pakket->steentjes = $rij["set_pieces"];
+                $pakket->voorraad = $rij["set_stock"];
 
-            // kan pakket id hier doen voor sommigen dingen maar waarschijnlijk niet nodig
-            $pakketten[] = $pakket;
+                // kan pakket id hier doen voor sommigen dingen maar waarschijnlijk niet nodig
+                $pakketten[] = $pakket;
+            }
         }
 
         $database->close();
