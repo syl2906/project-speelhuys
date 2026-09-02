@@ -17,6 +17,13 @@ if(isset($_GET["pakket_id"]) && !$pakket->initializeer($_GET["pakket_id"]))
     exit;
 }
 
+if(isset($_POST["delete"]) && isset($_GET["pakket_id"]))
+{
+    $pakket->delete();
+    header("location: ../overview.php");
+    exit;
+}
+
 if(isset($_POST["submit"]) && isset($_GET["pakket_id"]))
 {
     $wasChanged = false;
@@ -203,8 +210,15 @@ if(isset($_POST["submit"]) && isset($_GET["pakket_id"]))
                     <input type="text" placeholder="voorraad" name="voorraad" required value="<?= $pakket->voorraad ?>" style="margin-top: 10px;"/><br>
                     <input type="file" class="form-control" id="fotoupload" name="foto" style="margin-top: 10px;"/><br>
 
-                    <input type="submit" name="submit" class="btn btn-primary" value="Maak pakket"/>
+                    <input type="submit" name="submit" class="btn btn-primary" value="Verander pakket"/>
                 </form>
+
+                <div class="card" style="padding: 10px; margin-top: 40%; border-color: red;">
+                    <h5 class="text-justify text-danger">Gevarenzone</h5>
+                    <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
+                        <input type="submit" name="delete" class="btn btn-danger" value="Verwijder pakket"/>
+                    </form>
+                </div>
             </div>
             <div class="col-2">
             </div>
