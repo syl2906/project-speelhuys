@@ -11,7 +11,7 @@ class Thema
         $database = new Database();
         $database->start();
 
-        $veiligID = mysqli_real_escape_string($database->conn, $id);
+        $veiligID = mysqli_real_escape_string($database->conn, $inID);
         $query = "SELECT * FROM themes WHERE theme_id = " . $veiligID;
         $resultaat = $database->conn->query($query);
 
@@ -26,6 +26,44 @@ class Thema
 
         $database->close();
         return false;
+    }
+
+    public function update()
+    {
+        require_once "database.php";
+        $database = new Database();
+        $database->start();
+
+        $veiligID = mysqli_real_escape_string($database->conn, $this->ID);
+        $query = "UPDATE themes SET theme_name = '{$this->naam}' WHERE theme_id = {$veiligID}";
+        $database->conn->query($query);
+        $database->close();
+    }
+
+    public function insert()
+    {
+        require_once "database.php";
+
+        $database = new Database(); 
+        $database->start();
+
+        $veiligeNaam = mysqli_real_escape_string($database->conn, $this->naam);
+        $query = "INSERT INTO themes ( theme_name ) VALUES ( '{$veiligeNaam}' )";
+
+        $database->conn->query($query);
+        $database->close();
+    }
+
+    public function delete()
+    {
+        require_once "database.php";
+        $database = new Database();
+        $database->start();
+
+        $query = "DELETE FROM themes WHERE theme_id = " . $this->ID;
+
+        $database->conn->query($query);
+        $database->close();
     }
 
     public static function vindAlleThemas()

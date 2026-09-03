@@ -20,7 +20,42 @@ class CodeBlokkenPakket
         $database = new Database();
         $database->start();
 
+        $veiligID = mysqli_real_escape_string($database->conn, $inID);
         $query = "SELECT * FROM sets WHERE set_id = " . $inID;
+        $resultaat = $database->conn->query($query);
+
+        if($resultaat->num_rows > 0)
+        {
+            $rij = $resultaat->fetch_assoc();
+
+            $this->ID = $rij["set_id"];
+            $this->naam = $rij["set_name"];
+            $this->beschrijving = $rij["set_description"];
+            $this->brandID = $rij["set_brand_id"];
+            $this->themeID = $rij["set_theme_id"];
+            $this->fotoNaam = $rij["set_image"];
+            $this->prijs = $rij["set_price"];
+            $this->age = $rij["set_age"];
+            $this->steentjes = $rij["set_pieces"];
+            $this->voorraad = $rij["set_stock"];
+
+            $database->close();
+            return true;
+        }
+
+        $database->close();
+        return false;
+    }
+
+    public function initMetNaam($inNaam)
+    {
+        require_once "database.php";
+
+        $database = new Database();
+        $database->start();
+
+        $veiligeNaam = mysqli_real_escape_string($database->conn, $inNaam);
+        $query = "SELECT * FROM sets WHERE set_name = '{$veiligeNaam}'";
         $resultaat = $database->conn->query($query);
 
         if($resultaat->num_rows > 0)
