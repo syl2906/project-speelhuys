@@ -51,7 +51,7 @@ class Merk
 
         $veiligeNaam = mysqli_real_escape_string($database->conn, $this->naam);
         $veiligeLogo = mysqli_real_escape_string($database->conn, $this->logo);
-        $query = "INSERT INTO themes ( brand_name, brand_logo ) VALUES ( '{$veiligeNaam}', '{$veiligeLogo}' )";
+        $query = "INSERT INTO brands ( brand_name, brand_logo ) VALUES ( '{$veiligeNaam}', '{$veiligeLogo}' )";
 
         $database->conn->query($query);
         $database->close();
