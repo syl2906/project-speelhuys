@@ -5,6 +5,7 @@ require_once "../classes/thema.php";
 require_once "../classes/codeblokkenpakket.php";
 
 // TODO: Check voor sessie en of gebruiker beheerder is
+$isadmin = false; // TODO: zet dit wanneer administrator inlogd die dingen kan deleten.
 
 if(!isset($_GET["pakket_id"]) && !isset($_POST["pakket_naam"]))
 {
@@ -265,12 +266,17 @@ if(isset($_POST["submit"]) && isset($_GET["pakket_id"]))
                     <input type="submit" name="submit" class="btn btn-primary" value="Verander pakket"/>
                 </form>
 
-                <div class="card" style="padding: 10px; margin-top: 40%; border-color: red;">
-                    <h5 class="text-justify text-danger">Gevarenzone</h5>
-                    <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
-                        <input type="submit" name="delete" class="btn btn-danger" value="Verwijder pakket"/>
-                    </form>
-                </div>
+                <?php
+                if($isadmin)
+                {?>
+                    <div class="card" style="padding: 10px; margin-top: 40%; border-color: red;">
+                        <h5 class="text-justify text-danger">Gevarenzone</h5>
+                        <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
+                            <input type="submit" name="delete" class="btn btn-danger" value="Verwijder pakket"/>
+                        </form>
+                    </div>
+                <?php
+                }?>
             </div>
             <div class="col-2">
             </div>
