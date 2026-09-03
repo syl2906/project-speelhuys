@@ -94,7 +94,7 @@ if(isset($_POST["submit"]) && isset($_GET["pakket_id"]))
     $wasChanged = false;
 
     $image = null;
-    if(!empty($_POST["foto"]["name"]))
+    if(!empty($_FILES["foto"]["name"]))
     {
         $image = $_FILES["foto"]["name"];
 
