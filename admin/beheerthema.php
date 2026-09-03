@@ -104,7 +104,7 @@ if(isset($_POST["submit"]) && isset($_POST["thema_naam"]) && !empty($_POST["them
     </div>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <script>
