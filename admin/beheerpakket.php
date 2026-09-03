@@ -82,7 +82,7 @@ elseif(isset($_POST["pakket_naam"]) && !$pakket->initMetNaam($_POST["pakket_naam
     exit;
 }
 
-if(isset($_POST["delete"]) && isset($_GET["pakket_id"]))
+if(isset($_POST["delete"]) && isset($_GET["pakket_id"]) && $isadmin)
 {
     $pakket->delete();
     header("location: ../overview.php");

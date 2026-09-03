@@ -41,14 +41,35 @@
 <?php
 
 // TODO: check of gebruiker beheerder is.
+$isadmin = true; // TODO: zet dit wanneer administrator inlogd die dingen kan deleten.
 
 require_once "../classes/thema.php";
 
-if(isset($_POST["submit"]))
+
+// zou theoretisch nooit gebeuren behalve als de gebruiker zelf insertthema.php intypt.
+if(!isset($_GET["thema_id"]))
 {
-    $thema = new Thema();
+    echo "<h2 class=\"text text-danger\">Error! Geen thema_id gegeven.</h2>";
+    exit;
+}
+
+$thema = new Thema();
+if(!$thema->initializeer($_GET["thema_id"]))
+{
+    echo "<h2 class=\"text text-danger\">Error! thema met ID: " . $_GET["thema_id"] . " niet gevonden.</h2>";
+}
+
+if(isset($_POST["delete"]) && isset($_GET["thema_id"]) && $isadmin)
+{
+    $thema->delete();
+    header("location: thema.php");
+    exit;
+}
+
+if(isset($_POST["submit"]) && isset($_POST["thema_naam"]) && !empty($_POST["thema_naam"]))
+{
     $thema->naam = $_POST["thema_naam"];
-    $thema->insert();
+    $thema->update();
     header("location: thema.php");
     exit;
 }
@@ -59,11 +80,23 @@ if(isset($_POST["submit"]))
             <div class="col-3">
             </div>
             <div class="col-4">
-                <h5 class="text">Maak nieuwe thema</h5>
+                <h5 class="text">Verander thema: <?= $thema->naam ?> ( ID <?= $thema->ID ?> )</h5>
                 <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
-                    <input type="text" placeholder="thema naam" name="thema_naam" required value=""/><br>
+                    <input type="text" placeholder="thema naam" name="thema_naam" required value="<?= $thema->naam ?>"/><br>
                     <input type="submit" name="submit" class="btn btn-primary" value="submit" style="margin-top: 10px;"/>
                 </form>
+
+                <?php
+                if($isadmin)
+                {?>
+                    <div class="card" style="padding: 10px; margin-top: 40%; border-color: red;">
+                        <h5 class="text-justify text-danger">Gevarenzone</h5>
+                        <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
+                            <input type="submit" name="delete" class="btn btn-danger" value="Verwijder thema"/>
+                        </form>
+                    </div>
+                <?php
+                }?>
             </div>
             <div class="col-2">
             </div>
