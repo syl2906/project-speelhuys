@@ -208,6 +208,49 @@ class CodeBlokkenPakket
         $zoekTerm = "set theme = " . $inTheme . " AND set_brand = " . $inMerk;
         return vindAlleMetZoekTerm($zoekTerm);
     }
+
+    // 6 per pagina volgens ontwerp, pagina nummer is vanaf 1.
+    public static function vindVoorPagina($pagina, $filterQuery)
+    {
+        require_once "database.php";
+
+        $database = new Database();
+        $database->start();
+
+        $start = ($pagina - 1) * 6;
+        $counter = 0;
+
+        $veiligZoekTerm = mysqli_real_escape_string($database->conn, $zoekTerm);
+        $query = "SELECT * FROM sets WHERE set_id > " . $start . " AND " . $veiligZoekTerm;
+        $resultaat = $database->conn->query($query);
+
+        $pakketten = [];
+        if($resultaat->num_rows > 0)
+        {
+            while($rij = $resultaat->fetch_assoc() && $counter < 6)
+            {
+                $pakket = new CodeBlokkenPakket();
+
+                $pakket->ID = $rij["set_id"];
+                $pakket->naam = $rij["set_name"];
+                $pakket->beschrijving = $rij["set_description"];
+                $pakket->brandID = $rij["set_brand_id"];
+                $pakket->themeID = $rij["set_theme_id"];
+                $pakket->fotoNaam = $rij["set_image"];
+                $pakket->prijs = $rij["set_price"];
+                $pakket->age = $rij["set_age"];
+                $pakket->steentjes = $rij["set_pieces"];
+                $pakket->voorraad = $rij["set_stock"];
+
+                // kan pakket id hier doen voor sommigen dingen maar waarschijnlijk niet nodig
+                $pakketten[] = $pakket;
+                $counter += 1;
+            }
+        }
+
+        $database->close();
+        return $pakketten;
+    }
 }
 
 ?>
