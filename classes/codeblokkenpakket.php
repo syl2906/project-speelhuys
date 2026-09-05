@@ -32,7 +32,16 @@ class CodeBlokkenPakket
             $this->naam = $rij["set_name"];
             $this->beschrijving = $rij["set_description"];
             $this->brandID = $rij["set_brand_id"];
-            $this->themeID = $rij["set_theme_id"];
+
+            if(isset($rij["set_theme_id"]))
+            {
+                $this->themeID = $rij["set_theme_id"];
+            }
+            else
+            {
+                $this->themeID = 0;
+            }
+
             $this->fotoNaam = $rij["set_image"];
             $this->prijs = $rij["set_price"];
             $this->age = $rij["set_age"];
