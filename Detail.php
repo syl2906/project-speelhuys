@@ -1,8 +1,37 @@
 <?php
 
 include "classes/database.php";
+include "classes/codeblokkenpakket.php";
+include "classes/merk.php";
+include "classes/thema.php";
+
+$pakket = new CodeBlokkenPakket();
+
+if(isset($_GET["pakket_id"])) {
+
+    if(!$pakket->initializeer($_GET["pakket_id"])) {
+        echo "geen pakket gevonden!";
+        exit;
+    }
+
+}
+else {
+    echo "geen pakket geselecteerd";
+    exit;
+}
+
+$merk = new Merk();
+
+$merk->initializeer($pakket->brandID);
+
+$thema = new Thema();
+
+$thema->initializeer($pakket->themeID);
+
 
 ?>
+
+
 
 
 
@@ -21,7 +50,7 @@ include "classes/database.php";
 
     <div class="container mt-4">
         <nav class="mb-2">
-            <a href="index.php" class="btn btn-outline-secondary">
+            <a href="homepagina.php" class="btn btn-outline-secondary">
                 Homepagina
             </a>
 
@@ -43,38 +72,44 @@ include "classes/database.php";
                     <div class="col-md-5 text-center">
 
                         <div class="image-placeholder">
-                            <img src="upload/product.jpg" alt="Product afbeelding">
+                            <img src="upload/<?= $pakket->fotoNaam ?>" alt="Product afbeelding">
                         </div>
                     </div>
 
                     <div class="col-md-5">
 
                         <h4 class="mb-3">
-                            Product naam
+                            <?= $pakket->naam ?>
                         </h4>
 
                         <p>
                         Merk:
+                            <?= $merk->naam ?>
                         </p>
 
                         <p>
                         Thema:
+                            <?= $thema->naam ?>
                         </p>
 
                         <p>
                         Leeftijd:
+                            <?= $pakket->age ?>
                         </p>
 
                         <p>
                         Steentjes:
+                            <?= $pakket->steentjes ?>
                         </p>
 
                         <p>
                         Prijs:
+                           <?= $pakket->prijs ?>
                         </p>
 
                         <p>
                         Voorraad:
+                            <?= $pakket->voorraad ?>
                         </p>
 
                     </div>
@@ -89,7 +124,7 @@ include "classes/database.php";
                         </p>
 
                         <div class="beschrijving">
-                            Product omschrijving
+                            <?= $pakket->beschrijving ?>
                         </div>
 
                     </div>
