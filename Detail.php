@@ -50,7 +50,7 @@ $thema->initializeer($pakket->themeID);
 
     <div class="container mt-4">
         <nav class="mb-2">
-            <a href="homepagina.php" class="btn btn-outline-secondary">
+            <a href="index.php" class="btn btn-outline-secondary">
                 Homepagina
             </a>
 
@@ -72,7 +72,8 @@ $thema->initializeer($pakket->themeID);
                     <div class="col-md-5 text-center">
 
                         <div class="image-placeholder">
-                            <img src="upload/<?= $pakket->fotoNaam ?>" alt="Product afbeelding">
+                            <img src="upload/sets/<?= $pakket->fotoNaam ?>" alt="Product afbeelding">
+                            
                         </div>
                     </div>
 

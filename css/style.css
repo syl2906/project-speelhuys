@@ -10,8 +10,8 @@
 }
 
 .image-placeholder {
-    width: 140px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
     border: 1px solid black;
     margin: auto;
 
@@ -21,8 +21,8 @@
 }
 
 .image-placeholder img {
-    width: 100%;
-    height: 100%;
+    width: 200%;
+    height: 200%;
     object-fit: contain;
 }
 
@@ -41,4 +41,32 @@
     height: auto;
 
     word-wrap: break-word;
+}
+
+main {
+    width: 850px;
+    margin: 50px auto;
+    border: 1px solid black;
+    display: flex;
+    text-align: center;
+}
+
+.links {
+    width: 250px;
+}
+
+.midden {
+    width: 350px;
+}
+
+.rechts {
+    width: 250px;
+}
+
+.links img {
+    margin-bottom: 20px;
+}
+
+.rechts img {
+    margin-bottom: 20px;
 }

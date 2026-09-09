@@ -2,9 +2,48 @@
 
 
 include "classes/codeblokkenpakket.php";
+include "classes/merk.php";
+include "classes/thema.php";
 
+$pagina = 1;
 
-$pakketten = CodeBlokkenPakket::vindVoorPagina(1, "");
+if(isset($_GET["pagina"]))
+{
+    $pagina = $_GET["pagina"];
+}
+
+$zoeken = "";
+
+if(isset($_GET["zoeken"]))
+{
+    $zoeken = $_GET["zoeken"];
+}
+
+$filterQuery = "";
+
+if(isset($_GET["merk"]) && $_GET["merk"] != "")
+{
+    $filterQuery = "set_brand_id = " . (int)$_GET["merk"];
+}
+
+if(isset($_GET["thema"]) && $_GET["thema"] != "")
+{
+    if($filterQuery != "") $filterQuery .= " AND ";
+
+    $filterQuery .= "set_theme_id = " . (int)$_GET["thema"];
+}
+
+if(isset($_GET["leeftijd"]) && $_GET["leeftijd"] != "")
+{
+    if($filterQuery != "") $filterQuery .= " AND ";
+
+    $filterQuery .= "set_age >= " . (int)$_GET["leeftijd"];
+}
+
+$merken = Merk::vindAlleMerken();
+$themas = Thema::vindAlleThemas();
+
+$pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $zoeken, $filterQuery);
 
 ?>
 
@@ -20,113 +59,141 @@ $pakketten = CodeBlokkenPakket::vindVoorPagina(1, "");
 
 <body>
 
-<main>
-
-    <div>
-        <img src="https://www.pngall.com/wp-content/uploads/5/Lego-Toy-PNG-Download-Image.png" class="rounded float-start" width="200">
-    </div>
-
-    <div class="container mt-4">
+    <main>
 
         <div>
-            <img src="https://www.pngall.com/wp-content/uploads/5/Lego-Toy-PNG-Download-Image.png" class="rounded float-end" width="200">
+            <img src="https://www.pngall.com/wp-content/uploads/5/Lego-Toy-PNG-Download-Image.png" class="rounded float-start" width="200">
         </div>
 
+        <div class="container mt-4">
 
-        <nav class="mb-2">
-            <a href="index.php" class="btn btn-outline-secondary">
-                Homepagina
-            </a>
-
-            <a href="login.php" class="btn btn-outline-secondary">
-                Inloggen
-            </a>
-        </nav>
+            <div>
+                <img src="https://www.pngall.com/wp-content/uploads/5/Lego-Toy-PNG-Download-Image.png" class="rounded float-end" width="200">
+            </div>
 
 
-        <h1>Speelhuys</h1>
+            <nav class="mb-2">
+                <a href="index.php" class="btn btn-outline-secondary">
+                    Homepagina
+                </a>
 
-        <p>Welkom! Speelhuys Codeblokken.</p>
+                <a href="login.php" class="btn btn-outline-secondary">
+                    Inloggen
+                </a>
+            </nav>
 
 
-        <div>
-            <input type="text" placeholder="zoeken...">
+            <h1>Speelhuys</h1>
+
+            <p>Welkom! Speelhuys Codeblokken.</p>
+
+
+
+            <div>
+
+                <form method="GET">
+
+                    <input type="text" name="zoeken" placeholder="zoeken..." value="<?= $zoeken ?>">
+
+                    <br><br>
+
+                    <p>Filteren:</p>
+
+                    <select name="merk">
+                        <option value="">Merk</option>
+
+                        <?php foreach ($merken as $merk) { ?>
+                            <option value="<?= $merk->ID ?>">
+                                <?= $merk->naam ?>
+                            </option>
+                        <?php } ?>
+
+                    </select>
+
+                    <select name="thema">
+                        <option value="">Thema</option>
+
+                        <?php foreach ($themas as $thema) { ?>
+                            <option value="<?= $thema->ID ?>">
+                                <?= $thema->naam ?>
+                            </option>
+                        <?php } ?>
+
+                    </select>
+
+                    <select name="leeftijd">
+                        <option value="">Leeftijd</option>
+                        <option value="6">6+</option>
+                        <option value="8">8+</option>
+                        <option value="10">10+</option>
+                        <option value="12">12+</option>
+                    </select>
+
+                    <button type="submit">Zoeken</button>
+
+                </form>
+            </div>
+
+
+            <div class="row">
+
+
+                <?php
+
+                foreach ($pakketten as $pakket) {
+
+                ?>
+
+                    <section class="col-4 producten">
+
+                        <div>
+
+                            <a href="Detail.php?pakket_id=<?= $pakket->ID ?>">
+
+                                <img
+                                    src="upload/sets/<?= $pakket->fotoNaam ?>"
+                                    width="200">
+
+                            </a>
+
+                            <p>
+                                <?= $pakket->naam ?>
+                            </p>
+
+                            <p>
+                                Prijs: € <?= number_format($pakket->prijs, 2, ',', '.') ?>
+                            </p>
+
+                        </div>
+
+                    </section>
+
+
+                <?php
+
+                }
+
+                ?>
+
+
+            </div>
+
+
+            <div>
+
+                <a href="?pagina=<?= $pagina - 1 ?>">&lt;</a>
+
+                <a href="?pagina=1">1</a>
+                <a href="?pagina=2">2</a>
+                <a href="?pagina=3">3</a>
+
+                <a href="?pagina=<?= $pagina + 1 ?>">&gt;</a>
+
+            </div>
+
         </div>
 
-
-        <div>
-            <p>
-                Filteren:
-                Merk ▼
-                Thema ▼
-                Leeftijd ▼
-                Steentjes ▼
-                Prijs ▼
-            </p>
-        </div>
-
-
-        <div class="row">
-
-
-            <?php
-
-            foreach ($pakketten as $pakket)
-            {
-
-            ?>
-
-                <section class="producten">
-
-                    <div>
-
-                        <a href="Detail.php?pakket_id=<?= $pakket->ID ?>">
-
-                            <img
-                                src="upload/<?= $pakket->fotoNaam ?>"
-                                width="100"
-                            >
-
-                        </a>
-
-                        <p>
-                            <?= $pakket->naam ?>
-                        </p>
-
-                        <p>
-                            Prijs: € <?= number_format($pakket->prijs, 2, ',', '.') ?>
-                        </p>
-
-                    </div>
-
-                </section>
-
-
-            <?php
-
-            }
-
-            ?>
-
-
-        </div>
-
-
-        <div>
-
-            <button><</button>
-
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-
-            <button>></button>
-
-        </div>
-
-    </div>
-
-</main>
+    </main>
 
 </body>
 
