@@ -226,7 +226,7 @@ class CodeBlokkenPakket
     }
 
     // 6 per pagina volgens ontwerp, pagina nummer is vanaf 1.
-    public static function vindVoorPagina($pagina, $filterQuery)
+    public static function vindVoorPagina($pagina, $zoekterm, $filterQuery)
     {
         require_once "database.php";
 

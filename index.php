@@ -40,6 +40,7 @@ if(isset($_GET["leeftijd"]) && $_GET["leeftijd"] != "")
     $filterQuery .= "set_age >= " . (int)$_GET["leeftijd"];
 }
 
+
 $merken = Merk::vindAlleMerken();
 $themas = Thema::vindAlleThemas();
 
