@@ -11,7 +11,7 @@ if(isset($_POST["submit"]))
     $image = null;
     $image = $_FILES["foto"]["name"];
 
-    $target = "../upload/" . basename($image);
+    $target = "../upload/sets/" . basename($image);
     move_uploaded_file($_FILES["foto"]["tmp_name"], $target);
 
     /*

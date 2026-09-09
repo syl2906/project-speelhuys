@@ -73,7 +73,7 @@ if(isset($_POST["submit"]))
     {
         $image = $_FILES["foto"]["name"];
 
-        $target = "../upload/" . basename($image);
+        $target = "../upload/logos/" . basename($image);
         move_uploaded_file($_FILES["foto"]["tmp_name"], $target);
     }
 
