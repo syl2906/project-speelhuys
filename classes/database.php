@@ -27,13 +27,13 @@ class Database
         }
     }
 
-    function __destruct()
+    /*function __destruct()
     {
-        if(isset($this->conn))
+        if(isset($this->conn)  && $this->conn->ping())
         {
             $this->conn->close();
         }
-    }
+    }*/
 }
 
 ?>
