@@ -231,6 +231,10 @@ class CodeBlokkenPakket
 
         $veiligZoekTerm = mysqli_real_escape_string($database->conn, $filterQuery);
         $query = "SELECT * FROM sets WHERE set_id > " . $start . " AND " . $veiligZoekTerm;
+        if(empty($filterQuery))
+        {
+            $query = "SELECT * FROM sets WHERE set_id > " . $start;
+        }
         $resultaat = $database->conn->query($query);
 
         $pakketten = [];

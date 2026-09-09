@@ -26,6 +26,14 @@ class Database
             $this->conn->close();
         }
     }
+
+    function __destruct()
+    {
+        if(isset($this->conn))
+        {
+            $this->conn->close();
+        }
+    }
 }
 
 ?>
