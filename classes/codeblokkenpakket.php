@@ -184,7 +184,14 @@ class CodeBlokkenPakket
                 $pakket->naam = $rij["set_name"];
                 $pakket->beschrijving = $rij["set_description"];
                 $pakket->brandID = $rij["set_brand_id"];
-                $pakket->themeID = $rij["set_theme_id"];
+                if(isset($rij["set_theme_id"]))
+                {
+                    $pakket->themeID = $rij["set_theme_id"];
+                }
+                else
+                {
+                    $pakket->themeID = 0;
+                }
                 $pakket->fotoNaam = $rij["set_image"];
                 $pakket->prijs = $rij["set_price"];
                 $pakket->age = $rij["set_age"];
@@ -240,7 +247,7 @@ class CodeBlokkenPakket
         $pakketten = [];
         if($resultaat->num_rows > 0)
         {
-            while($rij = $resultaat->fetch_assoc() && $counter < 6)
+            while($counter < 6 && $rij = $resultaat->fetch_assoc())
             {
                 $pakket = new CodeBlokkenPakket();
 
@@ -248,7 +255,14 @@ class CodeBlokkenPakket
                 $pakket->naam = $rij["set_name"];
                 $pakket->beschrijving = $rij["set_description"];
                 $pakket->brandID = $rij["set_brand_id"];
-                $pakket->themeID = $rij["set_theme_id"];
+                if(isset($rij["set_theme_id"]))
+                {
+                    $pakket->themeID = $rij["set_theme_id"];
+                }
+                else
+                {
+                    $pakket->themeID = 0;
+                };
                 $pakket->fotoNaam = $rij["set_image"];
                 $pakket->prijs = $rij["set_price"];
                 $pakket->age = $rij["set_age"];
