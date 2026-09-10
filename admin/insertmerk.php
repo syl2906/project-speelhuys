@@ -40,7 +40,28 @@
 
 <?php
 
-// TODO: check of gebruiker beheerder is.
+require_once "../classes/sessie.php";
+require_once "../classes/gebruiker.php";
+
+$sessie = Sessie::vindActieveSessie();
+if($sessie == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$gebruiker = User::zoekIdeeeee($sessie->userId);
+if($gebruiker == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$isadmin = false;
+if($gebruiker->role == "admin")
+{
+    $isadmin = true;
+}
 
 require_once "../classes/merk.php";
 

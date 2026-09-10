@@ -20,7 +20,7 @@ class User
 
         $query = "SELECT * FROM users WHERE user_username = '" . $username . "' AND user_password = '" . $password . "'";
 
-        $result = $conn->query($query);
+        $result = $database->conn->query($query);
 
         $user = null;
 
@@ -36,7 +36,7 @@ class User
                 $user->role = $row['user_role'];
             }
         }
-        $conn->close();
+        $database->close();
         return $user;
     
     }
@@ -51,13 +51,13 @@ class User
 
 
 
-        $user_id = mysqli_real_escape_string($conn, $user_id);
+        $user_id = mysqli_real_escape_string($database->conn, $user_id);
 
         
         
 
         $query = "SELECT * FROM users WHERE user_id = '$user_id' ";
-        $resultaat = $conn->query($query);
+        $resultaat = $database->conn->query($query);
 
         $gebruikertje = null;
         if ($resultaat->num_rows > 0) {
@@ -73,7 +73,7 @@ class User
             
     
         }
-        $conn->close();
+        $database->close();
         return $gebruikertje; 
     }
 

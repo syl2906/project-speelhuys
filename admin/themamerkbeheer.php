@@ -22,7 +22,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-light" href="overzichtpakketten.php">Pakket beheer</a>
-                    </li>
+                    </li
                     <li class="nav-item">
                         <a class="btn btn-light" href="insertpakket.php">Pakket toevoegen</a>
                     </li>
@@ -42,7 +42,28 @@
 require_once "../classes/merk.php";
 require_once "../classes/thema.php";
 
-// TODO: voeg authenticatie toe.
+require_once "../classes/sessie.php";
+require_once "../classes/gebruiker.php";
+
+$sessie = Sessie::vindActieveSessie();
+if($sessie == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$gebruiker = User::zoekIdeeeee($sessie->userId);
+if($gebruiker == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$isadmin = false;
+if($gebruiker->role == "admin")
+{
+    $isadmin = true;
+}
 
 $merken = Merk::vindAlleMerken();
 $themas = Thema::vindAlleThemas();

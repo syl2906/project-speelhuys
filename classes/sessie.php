@@ -19,13 +19,13 @@ class Sessie
         $database = new Database();
         $database->start();
 
-        if (isset($_COOKIE["steptember-session"])) {
+        if (isset($_COOKIE["speelhuys-session"])) {
 
 
-            $key = mysqli_real_escape_string($conn, $_COOKIE["steptember-session"]);
+            $key = mysqli_real_escape_string($database->conn, $_COOKIE["speelhuys-session"]);
 
             $query = "SELECT * FROM session WHERE session_key = '" . $key . "' AND session_end > '" . date("Y-m-d H:i:s") . "' ";
-            $resultaat = $conn->query($query);
+            $resultaat = $database->conn->query($query);
 
             if ($resultaat->num_rows > 0) {
                 $rij = $resultaat->fetch_assoc();
@@ -38,7 +38,7 @@ class Sessie
                 $sessie->end = $rij["session_end"];
             }
         }
-        $conn->close();
+        $database->close();
 
         return $sessie;
     }
@@ -63,8 +63,8 @@ class Sessie
             '" . $this->end . "'
             )";
 
-        $conn->query($sql);
+        $database->conn->query($sql);
 
-        $conn->close();
+        $database->close();
     }
 }

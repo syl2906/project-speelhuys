@@ -20,8 +20,8 @@
           $sessie->end =  date("Y-m-d H:i:s", strtotime("+1 month"));
           $sessie->insert();
 
-          setcookie("steptember-session", $key, strtotime("1 month"), "/");
-          header("location: overview.php");
+          setcookie("speelhuys-session", $key, strtotime("1 month"), "/");
+          header("location: ../admin/overzichtpakketten.php");
         }
       }
       ?>

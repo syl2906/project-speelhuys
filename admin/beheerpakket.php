@@ -4,8 +4,28 @@ require_once "../classes/merk.php";
 require_once "../classes/thema.php";
 require_once "../classes/codeblokkenpakket.php";
 
-// TODO: Check voor sessie en of gebruiker beheerder is
-$isadmin = true; // TODO: zet dit wanneer administrator inlogd die dingen kan deleten.
+require_once "../classes/sessie.php";
+require_once "../classes/gebruiker.php";
+
+$sessie = Sessie::vindActieveSessie();
+if($sessie == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$gebruiker = User::zoekIdeeeee($sessie->userId);
+if($gebruiker == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$isadmin = false;
+if($gebruiker->role == "admin")
+{
+    $isadmin = true;
+}
 
 if(!isset($_GET["pakket_id"]) && !isset($_POST["pakket_naam"]))
 {

@@ -40,8 +40,28 @@
 
 <?php
 
-// TODO: check of gebruiker beheerder is.
-$isadmin = true; // TODO: zet dit wanneer administrator inlogd die dingen kan deleten.
+require_once "../classes/sessie.php";
+require_once "../classes/gebruiker.php";
+
+$sessie = Sessie::vindActieveSessie();
+if($sessie == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$gebruiker = User::zoekIdeeeee($sessie->userId);
+if($gebruiker == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$isadmin = false;
+if($gebruiker->role == "admin")
+{
+    $isadmin = true;
+}
 
 require_once "../classes/merk.php";
 

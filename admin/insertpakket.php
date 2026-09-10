@@ -4,7 +4,28 @@ require_once "../classes/merk.php";
 require_once "../classes/thema.php";
 require_once "../classes/codeblokkenpakket.php";
 
-// TODO: Check voor sessie en of gebruiker beheerder is
+require_once "../classes/sessie.php";
+require_once "../classes/gebruiker.php";
+
+$sessie = Sessie::vindActieveSessie();
+if($sessie == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$gebruiker = User::zoekIdeeeee($sessie->userId);
+if($gebruiker == null)
+{
+    header("location: ../index.php");
+    exit;
+}
+
+$isadmin = false;
+if($gebruiker->role == "admin")
+{
+    $isadmin = true;
+}
 
 if(isset($_POST["submit"]))
 {
