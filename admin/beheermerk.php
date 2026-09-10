@@ -96,6 +96,7 @@ if(isset($_POST["submit"]))
             <div class="col-4">
                 <h5 class="text">Verander merk: <?= $merk->naam ?> ( ID <?= $merk->ID ?> )</h5>
                 <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
+                    Naam:
                     <input type="text" placeholder="merk naam" name="merk_naam" required value="<?= $merk->naam ?>"/><br>
                     <input type="file" class="form-control" id="fotoupload" name="foto" style="margin-top: 10px;"/><br>
                     <input type="submit" name="submit" class="btn btn-primary" value="submit" style="margin-top: 10px;"/>

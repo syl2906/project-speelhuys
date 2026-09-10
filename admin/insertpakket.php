@@ -88,6 +88,7 @@ if(isset($_POST["submit"]))
             </div>
             <div class="col-4">
                 <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
+                    Naam:
                     <input type="text" placeholder="naam" name="naam" required value=""/><br>
 
                     <select name="merk" class="form-select" style="margin-top: 10px;">
@@ -118,13 +119,21 @@ if(isset($_POST["submit"]))
                         ?>
                     </select>
 
+                    Beschrijving:
                     <div class="form-group" style="margin-top: 10px;">
                         <textarea class="jqte" id="beschrijving" name="beschrijving" required>Lorem ipsum</textarea>
                     </div>
 
+                    Leeftijd:
                     <input type="text" placeholder="leeftijd" name="leeftijd" required value="" style="margin-top: 10px;"/><br>
+
+                    Steentjes:    
                     <input type="text" placeholder="steentjes" name="steentjes" required value="" style="margin-top: 10px;"/><br>
+
+                    Prijs:    
                     <input type="text" placeholder="prijs" name="prijs" required value="" style="margin-top: 10px;"/><br>
+
+                    Voorraad:    
                     <input type="text" placeholder="voorraad" name="voorraad" required value="" style="margin-top: 10px;"/><br>
                     <input type="file" class="form-control" id="fotoupload" name="foto" required style="margin-top: 10px;"/><br>
 

@@ -61,6 +61,7 @@ if(isset($_POST["submit"]))
             <div class="col-4">
                 <h5 class="text">Maak nieuwe thema</h5>
                 <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
+                    Naam:
                     <input type="text" placeholder="thema naam" name="thema_naam" required value=""/><br>
                     <input type="submit" name="submit" class="btn btn-primary" value="submit" style="margin-top: 10px;"/>
                 </form>
