@@ -3,11 +3,19 @@
       include "sessie.php";
       include "gebruiker.php";
 
+
+      $sessie = Sessie::vindActieveSessie();
+      if($sessie != null)
+      {
+          header("location: ../admin/overzichtpakketten.php");
+          exit;
+      }
+
       if (isset($_POST["gebruiker"])) {
         $gebruiker = User::allUsers($_POST["gebruiker"], $_POST["wachtwoord"]);
 
         if ($gebruiker == null) {
-          header("location: index.php");
+          header("location: ../index.php");
 
           exit;
         } else {
