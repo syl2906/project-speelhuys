@@ -96,7 +96,7 @@ $pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $filterQuery);
                     Homepagina
                 </a>
 
-                <a href="login.php" class="btn btn-outline-secondary">
+                <a href="classes/login.php" class="btn btn-outline-secondary">
                     Inloggen
                 </a>
             </nav>
