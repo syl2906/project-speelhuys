@@ -210,9 +210,15 @@ $pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $filterQuery);
 
                 <a href="?pagina=<?= $pagina - 1 ?>">&lt;</a>
 
-                <a href="?pagina=1">1</a>
-                <a href="?pagina=2">2</a>
-                <a href="?pagina=3">3</a>
+                <?php
+                    $hoeveelHeid = CodeBlokkenPakket::vindHoeveelheidPaginas($filterQuery);
+                    for($i = 0; $i < $hoeveelHeid; $i++)
+                    {
+                        ?>
+                        <a href="?pagina=<?= $i + 1 ?>"><?= $i + 1?></a>
+                        <?php
+                    }
+                ?>
 
                 <a href="?pagina=<?= $pagina + 1 ?>">&gt;</a>
 

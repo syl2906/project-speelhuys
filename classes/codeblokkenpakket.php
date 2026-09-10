@@ -240,12 +240,23 @@ class CodeBlokkenPakket
 
         $veiligZoekTerm = mysqli_real_escape_string($database->conn, $zoekterm);
         $query = "SELECT * FROM sets WHERE " . $veiligZoekTerm;
-        if(empty($filterQuery))
+        if(empty($zoekterm))
         {
             $query = "SELECT * FROM sets";
         }
+
+
         $resultaat = $database->conn->query($query);
-        $paginas = $resultaat->num_rows / 6;
+        $numRows = 0;
+        if($resultaat->num_rows > 0)
+        {
+            while($rij = $resultaat->fetch_assoc())
+            {
+                $numRows += 1;
+            } 
+        }
+
+        $paginas = ceil($numRows / 6);
 
         return $paginas;
     }
