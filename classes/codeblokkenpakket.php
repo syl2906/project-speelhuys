@@ -225,6 +225,36 @@ class CodeBlokkenPakket
         return vindAlleMetZoekTerm($zoekTerm);
     }
 
+    /*
+    Voorbeeld voor index.php:
+    <?php
+        for($i = 0; $i < CodeBlokkenPakket::vindHoeveelheidPaginas($filterQuery); $i++)
+        {
+            ?>
+            <a href="?pagina=<?= $i + 1 ?>"><?= $i +1?></a>
+            <?php
+        }
+    ?>
+    */
+    public static function vindHoeveelheidPaginas($zoekterm)
+    {
+        require_once "database.php";
+
+        $database = new Database();
+        $database->start();
+
+        $veiligZoekTerm = mysqli_real_escape_string($database->conn, $zoekterm);
+        $query = "SELECT * FROM sets WHERE " . $veiligZoekTerm;
+        if(empty($filterQuery))
+        {
+            $query = "SELECT * FROM sets";
+        }
+        $resultaat = $database->conn->query($query);
+        $paginas = $resultaat->num_rows / 6;
+
+        return $paginas;
+    }
+
     // 6 per pagina volgens ontwerp, pagina nummer is vanaf 1.
     public static function vindVoorPagina($pagina, $zoekterm, $filterQuery)
     {
