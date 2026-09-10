@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeukenPrins</title>
+    <title>Speelhuys</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="css/jquery-te-1.4.0.css">
@@ -21,13 +21,13 @@
                             <a class="btn btn-primary" href="../index.php">Overzicht</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-light" href="beheerpakket.php">Pakket beheer</a>
+                            <a class="btn btn-light" href="overzichtpakketten.php">Pakket beheer</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-light" href="insertpakket.php">Pakket toevoegen</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-light" href="merks.php">Merken / Thema's</a>
+                            <a class="btn btn-light" href="themamerkbeheer.php">Merken / Thema's</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-danger" href="logout.php">Uitloggen</a>
@@ -57,6 +57,7 @@ $merk = new Merk();
 if(!$merk->initializeer($_GET["merk_id"]))
 {
     echo "<h2 class=\"text text-danger\">Error! merk met ID: " . $_GET["merk_id"] . " niet gevonden.</h2>";
+    exit;
 }
 
 if(isset($_POST["delete"]) && isset($_GET["merk_id"]) && $isadmin)
@@ -95,6 +96,7 @@ if(isset($_POST["submit"]))
             <div class="col-4">
                 <h5 class="text">Verander merk: <?= $merk->naam ?> ( ID <?= $merk->ID ?> )</h5>
                 <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
+                    Naam:
                     <input type="text" placeholder="merk naam" name="merk_naam" required value="<?= $merk->naam ?>"/><br>
                     <input type="file" class="form-control" id="fotoupload" name="foto" style="margin-top: 10px;"/><br>
                     <input type="submit" name="submit" class="btn btn-primary" value="submit" style="margin-top: 10px;"/>

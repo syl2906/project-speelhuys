@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeukenPrins</title>
+    <title>Speelhuys</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="css/jquery-te-1.4.0.css">
@@ -21,13 +21,13 @@
                             <a class="btn btn-primary" href="../index.php">Overzicht</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-light" href="beheerpakket.php">Pakket beheer</a>
+                            <a class="btn btn-light" href="overzichtpakketten.php">Pakket beheer</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-light" href="insertpakket.php">Pakket toevoegen</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-light" href="themas.php">Merken / Thema's</a>
+                            <a class="btn btn-light" href="themamerkbeheer.php">Merken / Thema's</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-danger" href="logout.php">Uitloggen</a>
@@ -82,6 +82,7 @@ if(isset($_POST["submit"]) && isset($_POST["thema_naam"]) && !empty($_POST["them
             <div class="col-4">
                 <h5 class="text">Verander thema: <?= $thema->naam ?> ( ID <?= $thema->ID ?> )</h5>
                 <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
+                    Naam:
                     <input type="text" placeholder="thema naam" name="thema_naam" required value="<?= $thema->naam ?>"/><br>
                     <input type="submit" name="submit" class="btn btn-primary" value="submit" style="margin-top: 10px;"/>
                 </form>
