@@ -7,44 +7,59 @@ include "classes/thema.php";
 
 $pagina = 1;
 
-if(isset($_GET["pagina"]))
-{
+if (isset($_GET["pagina"])) {
     $pagina = $_GET["pagina"];
-}
-
-$zoeken = "";
-
-if(isset($_GET["zoeken"]))
-{
-    $zoeken = $_GET["zoeken"];
 }
 
 $filterQuery = "";
 
-if(isset($_GET["merk"]) && $_GET["merk"] != "")
-{
+if (isset($_GET["merk"]) && $_GET["merk"] != "") {
     $filterQuery = "set_brand_id = " . (int)$_GET["merk"];
 }
 
-if(isset($_GET["thema"]) && $_GET["thema"] != "")
-{
-    if($filterQuery != "") $filterQuery .= " AND ";
+if (isset($_GET["thema"]) && $_GET["thema"] != "") {
+    if ($filterQuery != "") $filterQuery .= " AND ";
 
     $filterQuery .= "set_theme_id = " . (int)$_GET["thema"];
 }
 
-if(isset($_GET["leeftijd"]) && $_GET["leeftijd"] != "")
+if (isset($_GET["leeftijd"]) && $_GET["leeftijd"] != "") {
+    if ($filterQuery != "") $filterQuery .= " AND ";
+
+    $filterQuery .= "set_age = " . (int)$_GET["leeftijd"];
+}
+
+if(isset($_GET["steentjes_min"]) && $_GET["steentjes_min"] != "")
 {
     if($filterQuery != "") $filterQuery .= " AND ";
 
-    $filterQuery .= "set_age >= " . (int)$_GET["leeftijd"];
+    $filterQuery .= "set_pieces >= " . (int)$_GET["steentjes_min"];
+}
+
+if(isset($_GET["steentjes_max"]) && $_GET["steentjes_max"] != "")
+{
+    if($filterQuery != "") $filterQuery .= " AND ";
+
+    $filterQuery .= "set_pieces <= " . (int)$_GET["steentjes_max"];
+}
+
+if (isset($_GET["prijs_min"]) && $_GET["prijs_min"] != "") {
+    if ($filterQuery != "") $filterQuery .= " AND ";
+
+    $filterQuery .= "set_price  >= " . (float)$_GET["prijs_min"];
+}
+
+if (isset($_GET["prijs_max"]) && $_GET["prijs_max"] != "") {
+    if ($filterQuery != "") $filterQuery .= " AND ";
+
+    $filterQuery .= "set_price  <=" . (float)$_GET["prijs_max"];
 }
 
 
 $merken = Merk::vindAlleMerken();
 $themas = Thema::vindAlleThemas();
 
-$pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $zoeken, $filterQuery);
+$pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $filterQuery);
 
 ?>
 
@@ -62,11 +77,13 @@ $pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $zoeken, $filterQuery);
 
     <main>
 
-        <div>
-            <img src="https://www.pngall.com/wp-content/uploads/5/Lego-Toy-PNG-Download-Image.png" class="rounded float-start" width="200">
-        </div>
+
 
         <div class="container mt-4">
+
+            <div>
+                <img src="https://www.pngall.com/wp-content/uploads/5/Lego-Toy-PNG-Download-Image.png" class="rounded float-start" width="200">
+            </div>
 
             <div>
                 <img src="https://www.pngall.com/wp-content/uploads/5/Lego-Toy-PNG-Download-Image.png" class="rounded float-end" width="200">
@@ -94,7 +111,6 @@ $pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $zoeken, $filterQuery);
 
                 <form method="GET">
 
-                    <input type="text" name="zoeken" placeholder="zoeken..." value="<?= $zoeken ?>">
 
                     <br><br>
 
@@ -128,7 +144,17 @@ $pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $zoeken, $filterQuery);
                         <option value="8">8+</option>
                         <option value="10">10+</option>
                         <option value="12">12+</option>
-                    </select>
+                    </select> </br></br>
+
+                    <label>steentjes:</label>
+                    <input type="number" name="steentjes_min" placeholder="Min">
+                    <input type="number" name="steentjes_max" placeholder="Max">
+                    </br>
+                    <label>prijs:</label>
+                    <input type="number" name="prijs_min" placeholder="Min">
+                    <input type="number" name="prijs_max" placeholder="Max">
+                    </br>
+
 
                     <button type="submit">Zoeken</button>
 

@@ -24,8 +24,7 @@ class CodeBlokkenPakket
         $query = "SELECT * FROM sets WHERE set_id = " . $inID;
         $resultaat = $database->conn->query($query);
 
-        if($resultaat->num_rows > 0)
-        {
+        if ($resultaat->num_rows > 0) {
             $rij = $resultaat->fetch_assoc();
 
             $this->ID = $rij["set_id"];
@@ -33,12 +32,9 @@ class CodeBlokkenPakket
             $this->beschrijving = $rij["set_description"];
             $this->brandID = $rij["set_brand_id"];
 
-            if(isset($rij["set_theme_id"]))
-            {
+            if (isset($rij["set_theme_id"])) {
                 $this->themeID = $rij["set_theme_id"];
-            }
-            else
-            {
+            } else {
                 $this->themeID = 0;
             }
 
@@ -67,8 +63,7 @@ class CodeBlokkenPakket
         $query = "SELECT * FROM sets WHERE set_name = '{$veiligeNaam}'";
         $resultaat = $database->conn->query($query);
 
-        if($resultaat->num_rows > 0)
-        {
+        if ($resultaat->num_rows > 0) {
             $rij = $resultaat->fetch_assoc();
 
             $this->ID = $rij["set_id"];
@@ -94,7 +89,7 @@ class CodeBlokkenPakket
     {
         require_once "database.php";
 
-        $database = new Database(); 
+        $database = new Database();
         $database->start();
 
         $veiligeNaam = mysqli_real_escape_string($database->conn, $this->naam);
@@ -119,7 +114,7 @@ class CodeBlokkenPakket
     {
         require_once "database.php";
 
-        $database = new Database(); 
+        $database = new Database();
         $database->start();
 
         $veiligeNaam = mysqli_real_escape_string($database->conn, $this->naam);
@@ -145,7 +140,7 @@ class CodeBlokkenPakket
             {$this->age},
             {$this->steentjes},
             {$this->voorraad} )";
-        
+
         $database->conn->query($query);
         $database->close();
     }
@@ -168,28 +163,23 @@ class CodeBlokkenPakket
 
         $database = new Database();
         $database->start();
-        
+
         $veiligZoekTerm = mysqli_real_escape_string($database->conn, $zoekTerm);
         $query = "SELECT * FROM sets WHERE " . $veiligZoekTerm;
         $resultaat = $database->conn->query($query);
 
         $pakketten = [];
-        if($resultaat->num_rows > 0)
-        {
-            while($rij = $resultaat->fetch_assoc())
-            {
+        if ($resultaat->num_rows > 0) {
+            while ($rij = $resultaat->fetch_assoc()) {
                 $pakket = new CodeBlokkenPakket();
 
                 $pakket->ID = $rij["set_id"];
                 $pakket->naam = $rij["set_name"];
                 $pakket->beschrijving = $rij["set_description"];
                 $pakket->brandID = $rij["set_brand_id"];
-                if(isset($rij["set_theme_id"]))
-                {
+                if (isset($rij["set_theme_id"])) {
                     $pakket->themeID = $rij["set_theme_id"];
-                }
-                else
-                {
+                } else {
                     $pakket->themeID = 0;
                 }
                 $pakket->fotoNaam = $rij["set_image"];
@@ -226,7 +216,7 @@ class CodeBlokkenPakket
     }
 
     // 6 per pagina volgens ontwerp, pagina nummer is vanaf 1.
-    public static function vindVoorPagina($pagina, $zoekterm, $filterQuery)
+    public static function vindVoorPagina($pagina, $filterQuery)
     {
         require_once "database.php";
 
@@ -238,29 +228,23 @@ class CodeBlokkenPakket
 
         $veiligZoekTerm = mysqli_real_escape_string($database->conn, $filterQuery);
         $query = "SELECT * FROM sets WHERE set_id > " . $start . " AND " . $veiligZoekTerm;
-        if(empty($filterQuery))
-        {
+        if (empty($filterQuery)) {
             $query = "SELECT * FROM sets WHERE set_id > " . $start;
         }
         $resultaat = $database->conn->query($query);
 
         $pakketten = [];
-        if($resultaat->num_rows > 0)
-        {
-            while($counter < 6 && $rij = $resultaat->fetch_assoc())
-            {
+        if ($resultaat->num_rows > 0) {
+            while ($counter < 6 && $rij = $resultaat->fetch_assoc()) {
                 $pakket = new CodeBlokkenPakket();
 
                 $pakket->ID = $rij["set_id"];
                 $pakket->naam = $rij["set_name"];
                 $pakket->beschrijving = $rij["set_description"];
                 $pakket->brandID = $rij["set_brand_id"];
-                if(isset($rij["set_theme_id"]))
-                {
+                if (isset($rij["set_theme_id"])) {
                     $pakket->themeID = $rij["set_theme_id"];
-                }
-                else
-                {
+                } else {
                     $pakket->themeID = 0;
                 };
                 $pakket->fotoNaam = $rij["set_image"];
@@ -279,5 +263,3 @@ class CodeBlokkenPakket
         return $pakketten;
     }
 }
-
-?>
