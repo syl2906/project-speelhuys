@@ -38,6 +38,8 @@ if(isset($_POST["submit"]))
     $pakket->voorraad = $_POST["voorraad"];
 
     $pakket->insert();
+    header("location: overzichtpakketten.php");
+    exit;
 }
 
 ?>

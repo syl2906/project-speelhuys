@@ -48,7 +48,9 @@
         </div>
 
         <div class="container">
+            <a class="btn btn-primary" href="insertpakket.php">Maak nieuw pakket</a>
             <div class="row justify-content-center">
+
                 <table class="table">
                     <tr>
                         <th>Foto</th>

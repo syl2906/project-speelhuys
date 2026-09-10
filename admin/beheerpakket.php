@@ -5,7 +5,7 @@ require_once "../classes/thema.php";
 require_once "../classes/codeblokkenpakket.php";
 
 // TODO: Check voor sessie en of gebruiker beheerder is
-$isadmin = false; // TODO: zet dit wanneer administrator inlogd die dingen kan deleten.
+$isadmin = true; // TODO: zet dit wanneer administrator inlogd die dingen kan deleten.
 
 if(!isset($_GET["pakket_id"]) && !isset($_POST["pakket_naam"]))
 {
@@ -27,7 +27,7 @@ if(isset($_GET["pakket_id"]) && !$pakket->initializeer($_GET["pakket_id"]))
 if(isset($_POST["delete"]) && isset($_GET["pakket_id"]) && $isadmin)
 {
     $pakket->delete();
-    header("location: ../overview.php");
+    header("location: overzichtpakketten.php");
     exit;
 }
 
