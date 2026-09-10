@@ -71,7 +71,7 @@ if(isset($_POST["submit"]))
                             <a class="btn btn-light" href="insertpakket.php">Pakket toevoegen</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-light" href="themas.php">Merken / Thema's</a>
+                            <a class="btn btn-light" href="themamerkbeheer.php">Merken / Thema's</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-danger" href="logout.php">Uitloggen</a>
