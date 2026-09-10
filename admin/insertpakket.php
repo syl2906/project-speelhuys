@@ -65,7 +65,7 @@ if(isset($_POST["submit"]))
                             <a class="btn btn-primary" href="../index.php">Overzicht</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-light" href="beheerpakket.php">Pakket beheer</a>
+                            <a class="btn btn-light" href="overzichtpakketten.php">Pakket beheer</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-light" href="insertpakket.php">Pakket toevoegen</a>

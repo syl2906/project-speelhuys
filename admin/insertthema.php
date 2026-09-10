@@ -24,7 +24,7 @@
                             <a class="btn btn-light" href="beheerpakket.php">Pakket beheer</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-light" href="insertpakket.php">Pakket toevoegen</a>
+                            <a class="btn btn-light" href="overzichtpakketten.php">Pakket toevoegen</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-light" href="themamerkbeheer.php">Merken / Thema's</a>

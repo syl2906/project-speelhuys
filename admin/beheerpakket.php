@@ -9,58 +9,7 @@ $isadmin = false; // TODO: zet dit wanneer administrator inlogd die dingen kan d
 
 if(!isset($_GET["pakket_id"]) && !isset($_POST["pakket_naam"]))
 {
-    ?>
-
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Speelhuys</title>
-        <link rel="stylesheet" type="text/css" href="../css/style.css" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/jquery-te-1.4.0.css">
-    </head>
-
-    <div class="navbar navbar-expand-lg navbar-light" style="padding: 10px;">
-        <div class="container-fluid">
-                <div class="collapse navbar-collapse">
-                    <div class="navbar-nav">
-                        
-                    </div>
-                    <div class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="btn btn-primary" href="../index.php">Overzicht</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-light" href="beheerpakket.php">Pakket beheer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-light" href="insertpakket.php">Pakket toevoegen</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-light" href="themamerkbeheer.php">Merken / Thema's</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-danger" href="logout.php">Uitloggen</a>
-                        </li>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" style="margin-top: 10px;">
-        <div class="row">
-            <div class="col-3">
-            </div>
-            <div class="col-4">
-                <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
-                    <input type="text" placeholder="pakket naam" name="pakket_naam" required value=""/><br>
-                    <input type="submit" name="beheerpakket" class="btn btn-primary" value="Beheer pakket" style="margin-top: 10px;"/>
-                </form>
-            </div>
-            <div class="col-2">
-            </div>
-
-    <?php
+    header("location: overzichtpakketten.php");
     exit;
 }
 
@@ -71,13 +20,6 @@ if(isset($_GET["pakket_id"]) && !$pakket->initializeer($_GET["pakket_id"]))
 {
     ?>
     <h2>Error! Kan niet pakket id: <?= $_GET["pakket_id"] ?> vinden.</h2>;
-    <?php
-    exit;
-}
-elseif(isset($_POST["pakket_naam"]) && !$pakket->initMetNaam($_POST["pakket_naam"]))
-{
-    ?>
-    <h2>Error! Kan niet pakket naam: <?= $_POST["pakket_naam"] ?> vinden.</h2>;
     <?php
     exit;
 }
@@ -182,7 +124,7 @@ if(isset($_POST["submit"]) && isset($_GET["pakket_id"]))
                             <a class="btn btn-primary" href="../index.php">Overzicht</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-light" href="beheerpakket.php">Pakket beheer</a>
+                            <a class="btn btn-light" href="overzichtpakketten.php">Pakket beheer</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-light" href="insertpakket.php">Pakket toevoegen</a>
