@@ -25,8 +25,10 @@ $merk = new Merk();
 $merk->initializeer($pakket->brandID);
 
 $thema = new Thema();
-
-$thema->initializeer($pakket->themeID);
+if(!$thema->initializeer($pakket->themeID))
+{
+    $thema = null;
+}
 
 
 ?>
@@ -88,10 +90,15 @@ $thema->initializeer($pakket->themeID);
                             <?= $merk->naam ?>
                         </p>
 
-                        <p>
-                        Thema:
-                            <?= $thema->naam ?>
-                        </p>
+                        <?php
+                        if($thema != null)
+                        {
+                        ?>
+                            <p>
+                            Thema:
+                                <?= $thema->naam ?>
+                            </p>
+                        <?php } ?>
 
                         <p>
                         Leeftijd:
