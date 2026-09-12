@@ -41,6 +41,38 @@ class User
     
     }
 
+    public static function vindAlleGebruikers()
+    {
+        require_once "database.php";
+        $database = new Database();
+        $database->start();
+
+        $gebruikers = [];
+        
+        $query = "SELECT * FROM users";
+        $resultaat = $database->conn->query($query);
+
+        if($resultaat->num_rows > 0)
+        {
+            while($row = $resultaat->fetch_assoc())
+            {
+                $gebruiker = new User();
+                $gebruiker->userId = $row["user_id"];
+                $gebruiker->firstname = $row["user_firstname"];
+                $gebruiker->lastname = $row["user_lastname"];
+                $gebruiker->email = $row["user_email"];
+                $gebruiker->username = $row["user_username"];
+                $gebruiker->password = $row["user_password"];
+                $gebruiker->role = $row["user_role"];
+                $gebruikers[] = $gebruiker;
+            }
+        }
+
+        $database->close();
+        return $gebruikers;
+
+    }
+
     public static function zoekIdeeeee($user_id) // deze haalt het idee op, heeft geen nut aangezien dit niet steptember is (was te lui om weg te halen)
     {
         
