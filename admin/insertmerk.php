@@ -29,6 +29,16 @@
                         <li class="nav-item">
                             <a class="btn btn-light" href="themamerkbeheer.php">Merken / Thema's</a>
                         </li>
+                        <?php
+                        if($isadmin == true)
+                        {
+                        ?>
+                        <li class="nav-item">
+                            <a class="btn btn-light" href="overzichtgebruikers.php">Gebruiker beheer</a>
+                        </li>
+                        <?php
+                        }
+                        ?>
                         <li class="nav-item">
                             <a class="btn btn-danger" href="logout.php">Uitloggen</a>
                         </li>

@@ -1,42 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speelhuys</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/jquery-te-1.4.0.css">
-</head>
-
-<body>
-    <div class="navbar navbar-expand-lg navbar-light" style="padding: 10px;">
-        <div class="container-fluid">
-                <div class="collapse navbar-collapse">
-                    <div class="navbar-nav">
-                        
-                    </div>
-                    <div class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="btn btn-primary" href="../index.php">Overzicht</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-light" href="beheerpakket.php">Pakket beheer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-light" href="overzichtpakketten.php">Pakket toevoegen</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-light" href="themamerkbeheer.php">Merken / Thema's</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-danger" href="logout.php">Uitloggen</a>
-                        </li>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <?php
 
@@ -75,6 +36,57 @@ if(isset($_POST["submit"]))
 }
 
 ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speelhuys</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/jquery-te-1.4.0.css">
+</head>
+
+<body>
+    <div class="navbar navbar-expand-lg navbar-light" style="padding: 10px;">
+        <div class="container-fluid">
+                <div class="collapse navbar-collapse">
+                    <div class="navbar-nav">
+                        
+                    </div>
+                    <div class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="../index.php">Overzicht</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-light" href="beheerpakket.php">Pakket beheer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-light" href="overzichtpakketten.php">Pakket toevoegen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-light" href="themamerkbeheer.php">Merken / Thema's</a>
+                        </li>
+                        <?php
+                        if($isadmin == true)
+                        {
+                        ?>
+                        <li class="nav-item">
+                            <a class="btn btn-light" href="overzichtgebruikers.php">Gebruiker beheer</a>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                        <li class="nav-item">
+                            <a class="btn btn-danger" href="logout.php">Uitloggen</a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-3">

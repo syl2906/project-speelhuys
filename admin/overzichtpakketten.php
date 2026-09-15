@@ -66,7 +66,7 @@
                         {
                         ?>
                         <li class="nav-item">
-                            
+                            <a class="btn btn-light" href="overzichtgebruikers.php">Gebruiker beheer</a>
                         </li>
                         <?php
                         }
