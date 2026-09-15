@@ -93,16 +93,18 @@ class User
 
         $gebruikertje = null;
         if ($resultaat->num_rows > 0) {
-            $rij = $resultaat->fetch_assoc();
+            $row = $resultaat->fetch_assoc();
             
 
-            $gebruikertje = new User;
-            $gebruikertje->userId = $rij["user_id"];
-            $gebruikertje->username = $rij["user_username"];
-            $gebruikertje->password = $rij["user_password"];
-            $gebruikertje->role = $rij["user_role"];
-
-            
+            $gebruikertje = new User();
+            $gebruikertje->userId = $row['user_id'];
+            $gebruikertje->firstname = $row['user_firstname'];
+            $gebruikertje->lastname = $row['user_lastname'];
+            $gebruikertje->email = $row['user_email'];
+            $gebruikertje->username = $row['user_username'];
+            $gebruikertje->password = $row['user_password'];
+            $gebruikertje->role = $row['user_role'];
+        
     
         }
         $database->close();
