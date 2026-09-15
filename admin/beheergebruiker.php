@@ -36,6 +36,13 @@ if($beheerdeGebruiker == null)
     exit;
 }
 
+if(isset($_POST["delete"]))
+{
+    $beheerdeGebruiker->delete();
+    header("location: overzichtgebruikers.php");
+    exit;
+}
+
 if(isset($_POST["submit"]))
 {
     $beheerdeGebruiker->firstname = $_POST["voornaam"];
@@ -147,7 +154,7 @@ if(isset($_POST["submit"]))
                     <div class="card" style="padding: 10px; margin-top: 40%; border-color: red;">
                         <h5 class="text-justify text-danger">Gevarenzone</h5>
                         <form method="POST" enctype="multipart/form-data" style="padding: 5px;">
-                            <input type="submit" name="delete" class="btn btn-danger" value="Verwijder merk"/>
+                            <input type="submit" name="delete" class="btn btn-danger" value="Verwijder gebruiker"/>
                         </form>
                     </div>
                 </div>

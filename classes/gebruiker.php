@@ -136,6 +136,18 @@ class User
         $database->close();
     }
 
+    public function delete()
+    {
+        require_once "database.php";
+        $database = new Database();
+        $database->start();
+
+        $query = "DELETE FROM users WHERE user_id = " . $this->userId;
+
+        $database->conn->query($query);
+        $database->close();
+    }
+
     public function insert()
     {
         require_once "database.php";
