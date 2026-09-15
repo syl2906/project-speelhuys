@@ -111,6 +111,52 @@ class User
         return $gebruikertje; 
     }
 
+    public function update()
+    {
+        require_once "database.php";
+        $database = new Database();
+        $database->start();
+
+        $veiligID = mysqli_real_escape_string($database->conn, $this->userId);
+        $veiligFirstname = mysqli_real_escape_string($database->conn, $this->firstname); 
+        $veiligLastname = mysqli_real_escape_string($database->conn, $this->lastname); 
+        $veiligEmail = mysqli_real_escape_string($database->conn, $this->email); 
+        $veiligUsername = mysqli_real_escape_string($database->conn, $this->username); 
+        $veiligPassword = mysqli_real_escape_string($database->conn, $this->password);
+        $veiligRol = mysqli_real_escape_string($database->conn, $this->role);
+
+        $query = "UPDATE users SET user_firstname = '{$veiligFirstname}', user_lastname = '{$veiligLastname}',
+                user_email = '{$veiligEmail}',
+                user_username = '{$veiligUsername}',
+                user_password = '{$veiligPassword}',
+                user_role = '{$veiligRol}'
+        WHERE user_id = {$veiligID}";
+
+        $database->conn->query($query);
+        $database->close();
+    }
+
+    public function insert()
+    {
+        require_once "database.php";
+
+        $database = new Database(); 
+        $database->start();
+
+        $veiligFirstname = mysqli_real_escape_string($database->conn, $this->firstname); 
+        $veiligLastname = mysqli_real_escape_string($database->conn, $this->lastname); 
+        $veiligEmail = mysqli_real_escape_string($database->conn, $this->email); 
+        $veiligUsername = mysqli_real_escape_string($database->conn, $this->username); 
+        $veiligPassword = mysqli_real_escape_string($database->conn, $this->password);
+        $veiligRol = mysqli_real_escape_string($database->conn, $this->role);
+
+        $query = "INSERT INTO users ( user_firstname, user_lastname, user_email, user_username, user_password, user_role ) VALUES ( '{$veiligNaam}', '{$veiligLastname}',
+                '{$veiligEmail}', '{$veiligUsername}', '{$veiligPassword}', '{$veiligRol}' )";
+
+        $database->conn->query($query);
+        $database->close();
+    }
+
 
 
 
