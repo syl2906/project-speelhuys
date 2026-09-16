@@ -19,7 +19,7 @@ if($gebruiker == null)
 
 if($gebruiker->role != "admin")
 {
-    header("location: overzichtgebruikers.php");
+    header("location: overzichtpakketten.php");
     exit;
 }
 
