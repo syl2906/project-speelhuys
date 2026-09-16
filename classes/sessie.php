@@ -24,7 +24,7 @@ class Sessie
 
             $key = mysqli_real_escape_string($database->conn, $_COOKIE["speelhuys-session"]);
 
-            $query = "SELECT * FROM session WHERE session_key = '" . $key . "' AND session_end > '" . date("Y-m-d H:i:s") . "' ";
+            $query = "SELECT * FROM sessions WHERE session_key = '" . $key . "' AND session_end > '" . date("Y-m-d H:i:s") . "' ";
             $resultaat = $database->conn->query($query);
 
             if ($resultaat->num_rows > 0) {
@@ -51,7 +51,7 @@ class Sessie
         $database->start();
 
         
-        $sql = "INSERT INTO `session` (
+        $sql = "INSERT INTO `sessions` (
             session_user_id, 
             session_key, 
             session_start, 
