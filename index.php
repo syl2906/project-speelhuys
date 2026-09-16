@@ -56,6 +56,11 @@ if (isset($_GET["prijs_max"]) && $_GET["prijs_max"] != "") {
     $filterQuery .= "set_price  <=" . (float)$_GET["prijs_max"];
 }
 
+if(isset($_GET["filter_query"]))
+{
+    $filterQuery = $_GET["filter_query"];
+}
+
 
 $merken = Merk::vindAlleMerken();
 $themas = Thema::vindAlleThemas();
@@ -209,19 +214,19 @@ $pakketten = CodeBlokkenPakket::vindVoorPagina($pagina, $filterQuery);
 
             <div>
 
-                <a href="?pagina=<?= $pagina - 1 ?>">&lt;</a>
+                <a href="?pagina=<?= $pagina - 1 ?>&filter_query=<?= $filterQuery ?>">&lt;</a>
 
                 <?php
                     $hoeveelHeid = CodeBlokkenPakket::vindHoeveelheidPaginas($filterQuery);
                     for($i = 0; $i < $hoeveelHeid; $i++)
                     {
                         ?>
-                        <a href="?pagina=<?= $i + 1 ?>"><?= $i + 1?></a>
+                        <a href="?pagina=<?= $i + 1 ?>&filter_query=<?= $filterQuery ?>"><?= $i + 1?></a>
                         <?php
                     }
                 ?>
 
-                <a href="?pagina=<?= $pagina + 1 ?>">&gt;</a>
+                <a href="?pagina=<?= $pagina + 1 ?>&filter_query=<?= $filterQuery ?>">&gt;</a>
 
             </div>
 
